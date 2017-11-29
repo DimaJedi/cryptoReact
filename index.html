@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 13px Helvetica, Arial;
+        }
+
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages li {
+            padding: 5px 10px;
+        }
+
+        #messages li.error {
+            color: red;
+        }
+
+        #messages li:nth-child(odd) {
+            background: #eee;
+        }
+    </style>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+        var socket = io();
+        socket.on('notification', function (msg) {
+            $('#messages').append($('<li>').text(msg));
+        });
+        socket.on('warning', function (msg) {
+            $('#messages').append($('<li class="error">').text(msg));
+        });
+    });
+</script>
+<body>
+<ul id="messages"></ul>
+</body>
+</html>
