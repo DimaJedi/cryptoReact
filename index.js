@@ -12,7 +12,7 @@ io.on('connection', () => {
     console.log('new connection');
 });
 
-http.listen(5000, () => {
-    console.log('listening on *:5000');
+http.listen(3333, () => {
+    console.log('listening on *:3333');
     configurator(io);
 });
