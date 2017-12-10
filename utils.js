@@ -4,11 +4,9 @@ const getCurrencies = async (url) => {
     const response = await fetch(url);
     const body = await response.text();
 
-    const {result} = JSON.parse(body);
-
-    return result;
+    return JSON.parse(body);
 };
 
 module.exports = {
-    getCurrencies
+    getCurrencies,
 };

@@ -1,34 +1,43 @@
 <!doctype html>
 <html>
 <head>
-    <title>Socket.IO chat</title>
+    <title>CryptoReact</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font: 13px Helvetica, Arial;
         }
 
-        #messages {
+        .market {
+            width: 30%;
+            border: solid 1px;
+            display: inline-block;
+        }
+
+        .marketContainer {
+            margin-bottom: 15px;
+            border-bottom: solid grey;
+        }
+
+        .messages {
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
 
-        #messages li {
+        .messages li {
             padding: 5px 10px;
         }
 
-        #messages li.error {
+        .messages li.error {
             color: red;
         }
 
-        #messages li:nth-child(odd) {
+        .messages li:nth-child(odd) {
             background: #eee;
+        }
+
+        #remove {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -36,16 +45,46 @@
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
     $(function () {
-        var socket = io();
-        socket.on('notification', function (msg) {
-            $('#messages').append($('<li>').text(msg));
+        $('#remove').on('click', () => $('.error').remove());
+        const audio = new Audio('http://soundbible.com/grab.php?id=2197&type=mp3');
+        const socket = io();
+        socket.on('notification', function ({market, text}) {
+            audio.play();
+            $(`#${market.toLowerCase()} .messages`).append($('<li>').text(text));
         });
-        socket.on('warning', function (msg) {
-            $('#messages').append($('<li class="error">').text(msg));
+        socket.on('warning', function ({market, text}) {
+            $(`#${market.toLowerCase()} .messages`).append($('<li class="error">').text(text));
+        });
+        socket.on('requests', function ({market, text}) {
+            $(`#${market.toLowerCase()} .requests`).html(text);
         });
     });
 </script>
 <body>
-<ul id="messages"></ul>
+<button id="remove">Clear Errors</button>
+<div class="markets">
+    <div class="market" id="bittrex">
+        <h1>Bittrex</h1>
+        <div class="marketContainer">
+            Requests count:
+            <div class="requests"></div>
+        </div>
+        <div class="marketContainer">
+            Notifications:
+            <div class="messages"></div>
+        </div>
+    </div>
+    <div class="market" id="bitfinex">
+        <h1>Bitfinex</h1>
+        <div class="marketContainer">
+            Requests count:
+            <div class="requests"></div>
+        </div>
+        <div class="marketContainer">
+            Notifications:
+            <div class="messages"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
