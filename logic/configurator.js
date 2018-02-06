@@ -3,6 +3,7 @@ const bitfinex = require('../markets/bitfinex.js');
 const binance = require('../markets/binance.js');
 const comparator = require('./comparator');
 const sendEmail = require('./send-email');
+const sendTg = require('./send-telegram');
 
 module.exports = (io) => {
     const listener = market => (notificationType, text) => {
@@ -13,6 +14,7 @@ module.exports = (io) => {
 
         if (notificationType === 'notification') {
             sendEmail('zhadkov@gmail.com', market, text);
+            sendTg(notificationType, market, text);
         }
     };
 
