@@ -8,7 +8,6 @@ const checkResponse = (result) => {
 
 module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
     let prevResponse;
-    let checksCounter = 0;
 
     const marketProcess = async () => {
         try {
@@ -20,9 +19,7 @@ module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
             }
 
             if (prevResponse.length !== response.length) {
-                broadcaster('notification', differenceBy(prevResponse, response, fieldToCompare || undefined));
-        } else {
-                broadcaster('requests', checksCounter += 1);
+                broadcaster('notification', differenceBy(response, prevResponse, fieldToCompare));
             }
 
             prevResponse = response;

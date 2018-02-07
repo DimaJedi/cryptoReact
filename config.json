@@ -2,5 +2,12 @@
   "telegram": {
     "chat": "-232997856",
     "token": "480572628:AAHlYSo_WeOZvgWrquSWyY54etmZd9urM9Y"
+  },
+  "marketUrls": {
+    "bittrexUrl": "https://bittrex.com/api/v1.1/public/getcurrencies",
+    "bitfinexUrl": "https://api.bitfinex.com/v1/symbols",
+    "binanceUrl": "https://api.binance.com/api/v1/ticker/allPrices",
+    "kucoinUrl": "https://api.kucoin.com/v1/market/open/coins-list",
+    "huobi": "https://api.huobi.pro/v1/common/currencys"
   }
 }
