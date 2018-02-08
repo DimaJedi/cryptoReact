@@ -18,9 +18,9 @@ module.exports = (io) => {
         sendTg(notificationType, market, text);
     };
 
-    comparator(2000, listener('Bittrex'), bittrex, 'Currency');
+    comparator(3000, listener('Bittrex'), bittrex, 'Currency');
     comparator(15000, listener('Bitfinex'), bitfinex);
-    comparator(2000, listener('Binance'), binance, 'symbol');
-    comparator(2000, listener('Kucoin'), kucoin, 'coin');
-    comparator(2000, listener('Huobi'), huobi);
+    // comparator(3000, listener('Binance'), binance, 'symbol');
+    comparator(3000, listener('Kucoin'), kucoin, 'coin');
+    comparator(3000, listener('Huobi'), huobi);
 };

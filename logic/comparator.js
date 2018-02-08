@@ -21,7 +21,7 @@ module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
             }
 
             if (prevResponse.length !== response.length) {
-                broadcaster('notification', differenceBy(response, prevResponse, fieldToCompare));
+                broadcaster('notification', JSON.stringify(differenceBy(response, prevResponse, fieldToCompare)));
             }
 
             prevResponse = response;
