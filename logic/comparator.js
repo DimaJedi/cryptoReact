@@ -1,4 +1,4 @@
-const { differenceBy } = require('lodash');
+const { differenceBy, debounce } = require('lodash');
 
 const checkResponse = (result) => {
     if (!result || !result.length) {
@@ -8,6 +8,8 @@ const checkResponse = (result) => {
 
 module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
     let prevResponse;
+    let errorMessage;
+    const sendError = debounce(() => broadcaster('warning', errorMessage), time + 1000, { leading: true });
 
     const marketProcess = async () => {
         try {
@@ -24,8 +26,8 @@ module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
 
             prevResponse = response;
         } catch ({ message }) {
-            broadcaster('warning', message);
-            console.log(message);
+            errorMessage = message;
+            sendError();
         }
     };
 
