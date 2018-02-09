@@ -8,8 +8,8 @@ const checkResponse = (result) => {
 
 module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
     let prevResponse;
-    let errorMessage;
-    const sendError = debounce(() => broadcaster('warning', errorMessage), time + 1000, { leading: true });
+    // let errorMessage;
+    // const sendError = () => broadcaster('warning', errorMessage);
 
     const marketProcess = async () => {
         try {
@@ -26,8 +26,9 @@ module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
 
             prevResponse = response;
         } catch ({ message }) {
-            errorMessage = message;
-            sendError();
+            // errorMessage = message;
+            // sendError();
+            console.log(message);
         }
     };
 
