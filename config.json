@@ -3,11 +3,34 @@
     "chat": "-232997856",
     "token": "480572628:AAHlYSo_WeOZvgWrquSWyY54etmZd9urM9Y"
   },
-  "marketUrls": {
-    "bittrexUrl": "https://bittrex.com/api/v1.1/public/getcurrencies",
-    "bitfinexUrl": "https://api.bitfinex.com/v1/symbols",
-    "binanceUrl": "https://api.binance.com/api/v1/ticker/allPrices",
-    "kucoinUrl": "https://api.kucoin.com/v1/market/open/coins-list",
-    "huobi": "https://api.huobi.pro/v1/common/currencys"
+  "markets": {
+    "bittrex": {
+      "time": 3000,
+      "url": "https://bittrex.com/api/v1.1/public/getcurrencies",
+      "name": "Bittrex",
+      "field": "Currency"
+    },
+    "bitfinex": {
+      "time": 15000,
+      "url": "https://api.bitfinex.com/v1/symbols",
+      "name": "Bitfinex"
+    },
+    "binance": {
+      "time": 3000,
+      "url": "https://api.binance.com/api/v3/ticker/price",
+      "name": "Binance",
+      "field": "symbol"
+    },
+    "kucoin": {
+      "time": 3000,
+      "url": "https://api.kucoin.com/v1/market/open/coins-list",
+      "name": "Kucoin",
+      "field": "coin"
+    },
+    "huobi": {
+      "time": 3000,
+      "url": "https://api.huobi.pro/v1/common/currencys",
+      "name": "Huobi"
+    }
   }
 }

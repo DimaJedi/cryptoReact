@@ -1,4 +1,4 @@
 const { requestData } = require('../utils.js');
-const { bitfinexUrl } = require('../config').marketUrls;
+const { url } = require('../config').markets.bitfinex;
 
-module.exports = () => requestData(bitfinexUrl);
+module.exports = () => requestData(url);

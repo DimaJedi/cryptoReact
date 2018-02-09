@@ -1,8 +1,8 @@
 const { requestData } = require('../utils.js');
-const { kucoinUrl } = require('../config').marketUrls;
+const { url } = require('../config').markets.kucoin;
 
 module.exports = async () => {
-        const { data } = await requestData(kucoinUrl);
+        const { data } = await requestData(url);
 
         return data;
 };

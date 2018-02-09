@@ -1,4 +1,4 @@
 const { requestData } = require('../utils.js');
-const { binanceUrl } = require('../config').marketUrls;
+const { url } = require('../config').markets.binance;
 
-module.exports = () => requestData(binanceUrl);
+module.exports = () => requestData(url);

@@ -1,15 +1,24 @@
-const { differenceBy, debounce } = require('lodash');
+const { differenceBy } = require('lodash');
+const sendEmail = require('./send-email');
+const sendTg = require('./send-telegram');
+const { markets } = require('../config');
 
+const broadcaster = (market, notificationType, text) => {
+    sendEmail('zhadkov@gmail.com', market, text);
+    sendTg(notificationType, market, text);
+};
 const checkResponse = (result) => {
     if (!result || !result.length) {
         throw new Error('Response currencies count is 0');
     }
 };
 
-module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
+module.exports = (marketId) => {
     let prevResponse;
-    // let errorMessage;
-    // const sendError = () => broadcaster('warning', errorMessage);
+
+    const { name, field, time } = markets[marketId];
+// eslint-disable-next-line global-require,import/no-dynamic-require
+    const requestMaker = require(`../markets/${marketId}`);
 
     const marketProcess = async () => {
         try {
@@ -21,14 +30,12 @@ module.exports = (time, broadcaster, requestMaker, fieldToCompare) => {
             }
 
             if (prevResponse.length !== response.length) {
-                broadcaster('notification', JSON.stringify(differenceBy(response, prevResponse, fieldToCompare)));
+                broadcaster(name, 'notification', JSON.stringify(differenceBy(response, prevResponse, field)));
             }
 
             prevResponse = response;
         } catch ({ message }) {
-            // errorMessage = message;
-            // sendError();
-            console.log(message);
+            console.log(`${name}: ${message}`);
         }
     };
 

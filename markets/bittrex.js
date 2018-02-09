@@ -1,8 +1,8 @@
 const { requestData } = require('../utils.js');
-const { bittrexUrl } = require('../config').marketUrls;
+const { url } = require('../config').markets.bittrex;
 
 module.exports = async () => {
-        const { result } = await requestData(bittrexUrl);
+        const { result } = await requestData(url);
 
         return result;
 };
